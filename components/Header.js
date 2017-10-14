@@ -17,9 +17,6 @@ export default function Header({backgroundColor}) {
         }
         <NativeHeader
             outerContainerStyles={  {
-                height: 50,
-                padding: 10,
-                paddingBottom: 7,
                 position: 'relative',
                 justifyContent: 'space-around',
                 backgroundColor
