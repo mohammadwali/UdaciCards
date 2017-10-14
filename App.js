@@ -8,6 +8,7 @@ import rootReducer from './reducers/index'
 
 import StatusBar from './components/StatusBar'
 import Header from './components/Header'
+import Decks from './components/Decks'
 
 const configureStore = initialState => {
     const store = createStore(rootReducer, initialState);
@@ -34,7 +35,7 @@ export default class App extends Component {
 
                     <StatusBar backgroundColor={orange}/>
                     <Header backgroundColor={orange}/>
-
+                    <Decks/>
 
                 </View>
             </Provider>
