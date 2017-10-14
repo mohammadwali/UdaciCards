@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Image, StyleSheet} from 'react-native'
+import {View, Image} from 'react-native'
 import {Header as NativeHeader} from 'react-native-elements'
 
 
@@ -16,19 +16,15 @@ export default function Header({backgroundColor}) {
              */
         }
         <NativeHeader
-            outerContainerStyles={{backgroundColor}}
+            outerContainerStyles={  {
+                height: 50,
+                padding: 10,
+                paddingBottom: 7,
+                position: 'relative',
+                justifyContent: 'space-around',
+                backgroundColor
+            } }
             leftComponent={Logo}
         />
     </View>
 }
-
-
-const styles = StyleSheet.create({
-    header: {
-        position: 'relative',
-        padding: 10,
-        height: 50,
-        paddingBottom: 7,
-        justifyContent: 'space-around'
-    }
-})
