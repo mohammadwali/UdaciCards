@@ -30,40 +30,18 @@ const DecksList = ({decks}) => <View style={{marginTop: 0}}>
 
 
 class Decks extends Component {
-
-    decks = {
-        React: {
-            title: 'React',
-            questions: [
-                {
-                    question: 'What is React?',
-                    answer: 'A library for managing user interfaces'
-                },
-                {
-                    question: 'Where do you make Ajax requests in React?',
-                    answer: 'The componentDidMount lifecycle event'
-                }
-            ]
-        },
-        JavaScript: {
-            title: 'JavaScript',
-            questions: [
-                {
-                    question: 'What is a closure?',
-                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
-                }
-            ]
-        }
-    };
-
     state = {
         isLoading: false,
         isRefreshing: false
     };
 
+    defaultProps = {
+        decks: {}
+    }
+
     render() {
         const {isLoading, isRefreshing} = this.state;
-        const {decks} = this;
+        const {decks} = this.props;
 
         return (
 
@@ -107,6 +85,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, ownProps) {
     return {
+        decks: state.decks,
         ...ownProps
     }
 }
