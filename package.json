@@ -24,7 +24,6 @@
     "react-native": "^0.48.4",
     "react-native-elements": "^0.17.0",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-form": "latest"
+    "redux": "^3.7.2"
   }
 }
