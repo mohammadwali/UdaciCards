@@ -35,7 +35,7 @@ class Decks extends Component {
         isRefreshing: false
     };
 
-    defaultProps = {
+    static defaultProps = {
         decks: {}
     }
 

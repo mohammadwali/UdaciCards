@@ -33,6 +33,7 @@ class AddDeckForm extends Component {
     render() {
         const {isValid, deckName} = this.state;
         const {onDeckValueChange} = this;
+        const {focus} = this.props;
 
 
         return (
@@ -41,7 +42,7 @@ class AddDeckForm extends Component {
                 <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
                     <View>
                         <TextInput
-                            autoFocus={true}
+                            autoFocus={focus}
                             style={styles.input}
                             defaultValue={deckName}
                             onChangeText={onDeckValueChange.bind(this)}

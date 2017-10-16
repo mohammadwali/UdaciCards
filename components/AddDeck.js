@@ -8,7 +8,9 @@ import {orange, darkGray} from '../utils/colors'
 import AddDeckFrom from './AddDeckForm'
 
 class AddDeck extends Component {
-    state = {};
+    state = {
+        focus: false
+    };
 
 
     render() {
@@ -28,7 +30,7 @@ class AddDeck extends Component {
                     </View>
                 </View>
 
-                <AddDeckFrom/>
+                <AddDeckFrom focus={this.state.focus}/>
 
             </View>
 
