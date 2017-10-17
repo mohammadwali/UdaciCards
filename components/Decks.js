@@ -6,6 +6,8 @@ import {List, ListItem} from 'react-native-elements'
 import {gray} from '../utils/colors'
 import {formatCardsCount} from '../utils'
 
+import {loadDecks} from '../actions/deckActions'
+
 
 const DecksHeading = () => <View style={{marginTop: 20}}>
     <Text style={{fontSize: 18, color: '#c6c8cb', fontWeight: 'bold'}}>Avialable Decks</Text>
@@ -34,10 +36,14 @@ class Decks extends Component {
     state = {
         isLoading: false,
         isRefreshing: false
-    };
+    }
 
     static defaultProps = {
         decks: {}
+    }
+
+    componentDidMount() {
+        this.props.loadDecks()
     }
 
     openDeck(deck) {
@@ -94,6 +100,15 @@ function mapStateToProps(state, ownProps) {
         ...ownProps
     }
 }
+
+function mapDispatchToProps() {
+    return {
+        loadDecks
+    }
+}
+
+
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(Decks)
