@@ -55,14 +55,14 @@ class Decks extends Component {
                 <ActivityIndicator
                     animating={true}
                     style={styles.activityIndicator}
-                    size="large"/>
+                    size='large'/>
 
                 :
 
                 <ScrollView
                     refreshControl={ <RefreshControl
                         refreshing={isRefreshing}
-                        onRefresh={() => console.log("refreshing....")}
+                        onRefresh={() => console.log('refreshing....')}
                     />}
                     style={{
                         marginLeft: 20,

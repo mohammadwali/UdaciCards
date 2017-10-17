@@ -14,7 +14,7 @@ const Button = ({hasBorder, iconName, onPress, text}) => {
                 onPress={onPress}
                 background={TouchableNativeFeedback.Ripple(darkOrange, true)}>
 
-                <View style={{flexDirection: "row", alignItems: "center"}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
 
                     <MaterialIcons name={iconName} style={{color: (hasBorder ? orange : white), marginRight: 1}}
                                    size={14}/>
@@ -73,23 +73,23 @@ class DeckView extends Component {
 
                     <Button
                         hasBorder
-                        iconName="library-add"
-                        text="Add Card"
+                        iconName='library-add'
+                        text='Add Card'
                         onPress={() => {
                         }}
                     />
 
                     <Button
-                        iconName="question-answer"
-                        text="Start Quiz"
+                        iconName='question-answer'
+                        text='Start Quiz'
                         onPress={() => {
                         }}
                     />
 
                     <Button
                         hasBorder
-                        iconName="delete"
-                        text="Remove Card"
+                        iconName='delete'
+                        text='Remove Card'
                         onPress={() => {
                         }}
                     />
