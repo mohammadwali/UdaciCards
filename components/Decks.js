@@ -4,22 +4,23 @@ import {ScrollView, View, Text, ActivityIndicator, RefreshControl, StyleSheet} f
 import {List, ListItem} from 'react-native-elements'
 
 import {gray} from '../utils/colors'
+import {formatCardsCount} from '../utils'
 
 
 const DecksHeading = () => <View style={{marginTop: 20}}>
     <Text style={{fontSize: 18, color: '#c6c8cb', fontWeight: 'bold'}}>Avialable Decks</Text>
 </View>
 
-const DecksList = ({decks}) => <View style={{marginTop: 0}}>
+const DecksList = ({decks, openDeck}) => <View style={{marginTop: 0}}>
     <List containerStyle={{borderTopWidth: 0, marginTop: 10}}>
         {
             Object.keys(decks).map(deck => {
                 const deckItem = decks[deck];
                 const {questions, title} = deckItem;
 
-                return <ListItem onPress={() => alert("hey")}
+                return <ListItem onPress={() => openDeck(deckItem)}
                                  containerStyle={{borderBottomColor: gray}}
-                                 rightTitle={questions.length + " cards"}
+                                 rightTitle={ formatCardsCount(questions.length) }
                                  key={deck}
                                  title={title}
                 />
@@ -39,9 +40,13 @@ class Decks extends Component {
         decks: {}
     }
 
+    openDeck(deck) {
+        this.props.screenProps.rootNavigation.navigate('DeckView', {title: deck.title});
+    }
+
     render() {
-        const {isLoading, isRefreshing} = this.state;
         const {decks} = this.props;
+        const {isLoading, isRefreshing} = this.state;
 
         return (
 
@@ -64,7 +69,7 @@ class Decks extends Component {
                         marginRight: 20
                     }}>
                     <DecksHeading />
-                    <DecksList decks={decks}/>
+                    <DecksList decks={decks} openDeck={this.openDeck.bind(this)}/>
                 </ScrollView>
         )
     }

@@ -14,6 +14,7 @@ import StatusBar from './components/StatusBar'
 import Header from './components/Header'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
+import DeckView from './components/DeckView';
 
 
 const Tabs = TabNavigator({
@@ -63,10 +64,20 @@ const navOptions = {
 }
 const MainNavigator = StackNavigator({
     Home: {
-        screen: Tabs
-    }
-})
+        screen: ({navigation}) => <View style={{flex: 1}}>
+            <Header backgroundColor={orange}/>
+            <Tabs screenProps={{rootNavigation: navigation}}/>
+        </View>,
 
+        navigationOptions: {
+            header: null
+        }
+    },
+    DeckView: {
+        screen: DeckView,
+        navigationOptions: navOptions
+    },
+})
 
 const configureStore = initialState => {
     const store = createStore(rootReducer, initialState);
@@ -95,7 +106,6 @@ export default class App extends Component {
                 <View style={{flex: 1, backgroundColor: gray, flexDirection: 'column'}}>
 
                     <StatusBar backgroundColor={orange}/>
-                    <Header backgroundColor={orange}/>
                     <MainNavigator />
 
                 </View>
