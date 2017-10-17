@@ -4,7 +4,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
 
 import {formatCardsCount} from '../utils'
-import {darkOrange, orange, white, black} from '../utils/colors'
+import {darkOrange, orange, white, black, darkGray} from '../utils/colors'
 
 
 const Button = ({hasBorder, iconName, onPress, text}) => {
@@ -14,7 +14,7 @@ const Button = ({hasBorder, iconName, onPress, text}) => {
                 onPress={onPress}
                 background={TouchableNativeFeedback.Ripple(darkOrange, true)}>
 
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
                     <MaterialIcons name={iconName} style={{color: (hasBorder ? orange : white), marginRight: 1}}
                                    size={14}/>
@@ -52,8 +52,7 @@ class DeckView extends Component {
                     <View style={styles.card}>
 
                         <Text style={styles.cardTitle}>{deck.title}</Text>
-                        <Text
-                            style={styles.cardSubTitle}>
+                        <Text style={{color: darkGray}}>
 
                             { formatCardsCount(availableCards) } available.
 
@@ -67,34 +66,42 @@ class DeckView extends Component {
                 </View>
 
                 <View style={{
-                    flexDirection: 'row', justifyContent: 'center',
-                    alignItems: 'center',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
+                    <View style={{
+                        flexDirection: 'row'
+                    }}>
 
-                    <Button
-                        hasBorder
-                        iconName='library-add'
-                        text='Add Card'
-                        onPress={() => {
-                        }}
-                    />
-
-                    <Button
-                        iconName='question-answer'
-                        text='Start Quiz'
-                        onPress={() => {
-                        }}
-                    />
-
-                    <Button
-                        hasBorder
-                        iconName='delete'
-                        text='Remove Card'
-                        onPress={() => {
-                        }}
-                    />
+                        <Button
+                            hasBorder
+                            iconName='library-add'
+                            text='Add Card'
+                            onPress={() => {
+                            }}
+                        />
 
 
+                        <Button
+                            hasBorder
+                            iconName='delete'
+                            text='Remove Card'
+                            onPress={() => {
+                            }}
+                        />
+
+
+                    </View>
+
+                    <View style={{width: 300}}>
+                        <Button
+                            textStyle={{textAlign: 'center'}}
+                            iconName='question-answer'
+                            text='Start Quiz'
+                            onPress={() => {
+                            }}
+                        />
+                    </View>
                 </View>
             </View>
         )
