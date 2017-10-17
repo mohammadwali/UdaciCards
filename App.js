@@ -55,6 +55,18 @@ const Tabs = TabNavigator({
     }
 })
 
+const navOptions = {
+    headerTintColor: white,
+    headerStyle: {
+        backgroundColor: orange
+    }
+}
+const MainNavigator = StackNavigator({
+    Home: {
+        screen: Tabs
+    }
+})
+
 
 const configureStore = initialState => {
     const store = createStore(rootReducer, initialState);
@@ -84,7 +96,7 @@ export default class App extends Component {
 
                     <StatusBar backgroundColor={orange}/>
                     <Header backgroundColor={orange}/>
-                    <Tabs/>
+                    <MainNavigator />
 
                 </View>
             </Provider>
