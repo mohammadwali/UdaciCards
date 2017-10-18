@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import {View, Platform} from 'react-native'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import {Constants} from 'expo'
 import {MaterialIcons} from '@expo/vector-icons'
 import {TabNavigator, StackNavigator} from 'react-navigation'
+import thunk from 'redux-thunk';
 
 import {orange, gray, white, darkGray} from './utils/colors'
 
@@ -79,8 +80,8 @@ const MainNavigator = StackNavigator({
     },
 })
 
-const configureStore = initialState => {
-    const store = createStore(rootReducer, initialState);
+const configureStore = () => {
+    const store = createStore(rootReducer, applyMiddleware(thunk));
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers

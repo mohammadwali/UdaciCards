@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
 import {MaterialIcons} from '@expo/vector-icons'
-import {View, TextInput, StyleSheet, KeyboardAvoidingView, TouchableNativeFeedback} from 'react-native'
+import {View, TextInput, StyleSheet, KeyboardAvoidingView, TouchableNativeFeedback, ToastAndroid} from 'react-native'
 
 import {orange, darkGray, darkOrange, white} from '../utils/colors'
 
 
-const SubmitButton = ({disabled}) => {
+const SubmitButton = ({disabled, onPress}) => {
     return <View style={[styles.button, {backgroundColor: (disabled ? darkGray : orange)}]}>
         <TouchableNativeFeedback
+            onPress={onPress}
             disabled={disabled}
             background={TouchableNativeFeedback.Ripple(darkOrange, true)}>
             <View>
@@ -30,9 +31,23 @@ class AddDeckForm extends Component {
         })
     }
 
+    saveDeck(deckName) {
+        if (!this.state.isValid) {
+            return ToastAndroid.show('Deck name should be greater then 3 characters', ToastAndroid.SHORT);
+        }
+
+        this.props.onSubmit(deckName);
+
+        this.setState({
+            isValid: false,
+            deckName: ""
+        })
+    }
+
+
     render() {
         const {isValid, deckName} = this.state;
-        const {onDeckValueChange} = this;
+        const {onDeckValueChange, saveDeck} = this;
         const {focus} = this.props;
 
 
@@ -44,14 +59,16 @@ class AddDeckForm extends Component {
                         <TextInput
                             autoFocus={focus}
                             style={styles.input}
-                            defaultValue={deckName}
+                            value={deckName}
+                            onSubmitEditing={() => saveDeck.bind(this)(deckName)}
                             onChangeText={onDeckValueChange.bind(this)}
+
                         />
                     </View>
                 </KeyboardAvoidingView>
 
 
-                <SubmitButton disabled={!isValid}/>
+                <SubmitButton disabled={!isValid} onPress={() => saveDeck.bind(this)(deckName)}/>
             </View>
         )
     }

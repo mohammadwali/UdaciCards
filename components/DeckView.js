@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         marginTop: 20,
-        color: white,
         marginRight: 10,
         borderColor: orange,
     },

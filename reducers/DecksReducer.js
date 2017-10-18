@@ -1,3 +1,5 @@
+import * as actions from '../actions/actionTypes'
+
 const initialState = {
     React: {
         title: 'React',
@@ -37,8 +39,12 @@ const initialState = {
 };
 
 
-export default function DecksReducer(state = initialState, action) {
+export default function DecksReducer(state = {}, action) {
     switch (action.type) {
+
+        case actions.DECKS_LOADED:
+            return {...action.decks}
+
 
         default:
             return state;

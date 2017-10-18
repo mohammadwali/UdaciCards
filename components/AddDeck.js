@@ -4,6 +4,7 @@ import {MaterialIcons} from '@expo/vector-icons'
 import {Text, StyleSheet, View} from 'react-native'
 
 import {orange, darkGray} from '../utils/colors'
+import {createDeck} from '../actions/deckActions'
 
 import AddDeckFrom from './AddDeckForm'
 
@@ -30,7 +31,8 @@ class AddDeck extends Component {
                     </View>
                 </View>
 
-                <AddDeckFrom focus={this.state.focus}/>
+                <AddDeckFrom focus={this.state.focus}
+                             onSubmit={this.props.createDeck.bind(this)}/>
 
             </View>
 
@@ -57,4 +59,10 @@ function mapStateToProps(state, ownProps) {
         ...ownProps
     }
 }
-export default connect(mapStateToProps)(AddDeck)
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        createDeck: title => dispatch(createDeck(title, () => ownProps.screenProps.rootNavigation.navigate('DeckView', {title})))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck)

@@ -70,12 +70,14 @@ class Decks extends Component {
                         refreshing={isRefreshing}
                         onRefresh={() => console.log('refreshing....')}
                     />}
-                    style={{
+                >
+                    <View style={{
                         marginLeft: 20,
                         marginRight: 20
                     }}>
-                    <DecksHeading />
-                    <DecksList decks={decks} openDeck={this.openDeck.bind(this)}/>
+                        <DecksHeading />
+                        <DecksList decks={decks} openDeck={this.openDeck.bind(this)}/>
+                    </View>
                 </ScrollView>
         )
     }
@@ -101,9 +103,9 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-        loadDecks
+        loadDecks: () => dispatch(loadDecks())
     }
 }
 
