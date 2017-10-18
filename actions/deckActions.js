@@ -1,4 +1,4 @@
-import {getDecks, saveDeck} from '../utils/storage'
+import {getDecks, saveDeck, removeDeck} from '../utils/storage'
 
 import * as actions from './actionTypes'
 
@@ -22,3 +22,5 @@ export const createDeck = (title, onDone) => dispatch => saveDeck(title)
 
     }))
     .catch(error => console.log("something went wrong ", error))
+
+export const deleteDeck = title => dispatch => removeDeck(title).then(() => loadDecks()(dispatch))

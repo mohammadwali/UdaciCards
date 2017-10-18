@@ -12,5 +12,10 @@ export const saveDeck = title => AsyncStorage.mergeItem(STORAGE_KEY, JSON.string
         questions: []
     }
 }))
-    .then(result => console.log(result))
     .catch(e => console.log(e))
+
+export const removeDeck = title => getDecks().then(decks => {
+    delete decks[title];
+
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+})

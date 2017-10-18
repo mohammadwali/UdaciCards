@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, TouchableNativeFeedback, View} from 'react-native';
+import {Text, StyleSheet, TouchableNativeFeedback, View, Alert, ToastAndroid} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 import {connect} from 'react-redux';
 
 import {formatCardsCount} from '../utils'
 import {darkOrange, orange, white, black, darkGray} from '../utils/colors'
 
+import {deleteDeck as removeDeck} from '../actions/deckActions'
 
 const Button = ({hasBorder, iconName, onPress, text}) => {
     return (
@@ -40,7 +41,7 @@ class DeckView extends Component {
 
 
     render() {
-        const {deck} = this.props;
+        const {deck, deleteDeck} = this.props;
         const availableCards = deck.questions.length;
 
         return (
@@ -86,8 +87,7 @@ class DeckView extends Component {
                             hasBorder
                             iconName='delete'
                             text='Remove Card'
-                            onPress={() => {
-                            }}
+                            onPress={() => deleteDeck.bind(this)(deck.title)}
                         />
 
 
@@ -164,4 +164,33 @@ function mapStateToProps(state, {navigation}) {
     }
 }
 
-export default connect(mapStateToProps)(DeckView);
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        deleteDeck: (title) => {
+
+            Alert.alert(
+                `Delete ${title}?`,
+                `Are you sure you want to delete '${title}' Deck?`,
+                [
+                    {text: 'Cancel', style: 'cancel'},
+                    {
+                        text: 'Delete',
+                        onPress: () => {
+                            dispatch(removeDeck(title))
+
+                            ownProps.navigation.goBack();
+
+                            ToastAndroid.show(`Deck ${title} deleted successfully!`, ToastAndroid.SHORT);
+                        }
+                    },
+                ],
+                {
+                    cancelable: true
+                }
+            )
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckView);
