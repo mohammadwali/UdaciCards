@@ -8,27 +8,7 @@ import {darkOrange, orange, white, black, darkGray} from '../utils/colors'
 
 import {deleteDeck as removeDeck} from '../actions/deckActions'
 
-const Button = ({hasBorder, iconName, onPress, text}) => {
-    return (
-        <View style={   !hasBorder ? styles.button : [styles.button, styles.buttonBorder]   }>
-            <TouchableNativeFeedback
-                onPress={onPress}
-                background={TouchableNativeFeedback.Ripple(darkOrange, true)}>
-
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-
-                    <MaterialIcons name={iconName} style={{color: (hasBorder ? orange : white), marginRight: 1}}
-                                   size={14}/>
-
-                    <Text style={{color: (hasBorder ? orange : white)}}> { text } </Text>
-
-                </View>
-
-            </TouchableNativeFeedback>
-        </View>
-    )
-}
-
+import FlatButton from '../components/FlatButton'
 
 class DeckView extends Component {
     static navigationOptions = ({navigation}) => {
@@ -41,7 +21,7 @@ class DeckView extends Component {
 
 
     render() {
-        const {deck, deleteDeck} = this.props;
+        const {deck, deleteDeck, navigation} = this.props;
         const availableCards = deck.questions.length;
 
         return (
@@ -74,16 +54,15 @@ class DeckView extends Component {
                         flexDirection: 'row'
                     }}>
 
-                        <Button
+                        <FlatButton
                             hasBorder
                             iconName='library-add'
                             text='Add Card'
-                            onPress={() => {
-                            }}
+                            onPress={() => navigation.navigate('AddCard', {deckTitle: deck.title})}
                         />
 
 
-                        <Button
+                        <FlatButton
                             hasBorder
                             iconName='delete'
                             text='Remove Card'
@@ -94,7 +73,7 @@ class DeckView extends Component {
                     </View>
 
                     <View style={{width: 300}}>
-                        <Button
+                        <FlatButton
                             textStyle={{textAlign: 'center'}}
                             iconName='question-answer'
                             text='Start Quiz'
@@ -141,18 +120,6 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: '100',
         color: orange
-    },
-    button: {
-        backgroundColor: orange,
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
-        marginTop: 20,
-        marginRight: 10,
-        borderColor: orange,
-    },
-    buttonBorder: {
-        backgroundColor: null,
     }
 });
 

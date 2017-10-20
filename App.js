@@ -16,6 +16,7 @@ import Header from './components/Header'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView';
+import AddCard from './components/AddCard'
 
 
 const Tabs = TabNavigator({
@@ -57,7 +58,7 @@ const Tabs = TabNavigator({
     }
 })
 
-const navOptions = {
+const mainNavigatorViewOptions = {
     headerTintColor: white,
     headerStyle: {
         backgroundColor: orange
@@ -76,7 +77,11 @@ const MainNavigator = StackNavigator({
     },
     DeckView: {
         screen: DeckView,
-        navigationOptions: navOptions
+        navigationOptions: mainNavigatorViewOptions
+    },
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: {title: 'Add Card', ...mainNavigatorViewOptions}
     },
 })
 

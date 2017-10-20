@@ -19,3 +19,9 @@ export const removeDeck = title => getDecks().then(decks => {
 
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
 })
+
+export const createCard = (deck, card) => getDecks().then(decks => {
+    decks[deck].questions.push(card);
+
+    return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+})
