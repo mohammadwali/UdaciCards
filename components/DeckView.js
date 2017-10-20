@@ -65,7 +65,7 @@ class DeckView extends Component {
                         <FlatButton
                             hasBorder
                             iconName='delete'
-                            text='Remove Card'
+                            text='Remove Deck'
                             onPress={() => deleteDeck.bind(this)(deck.title)}
                         />
 
