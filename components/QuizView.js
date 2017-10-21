@@ -1,5 +1,6 @@
 import Chroma from 'chroma-js'
 import {LinearGradient} from 'expo'
+import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, Animated, Dimensions} from 'react-native'
 
@@ -18,7 +19,9 @@ const BOTTOM_COLORS_SPECTRUM = Chroma.scale(BOTTOM_COLORS).colors(GRADIENT_COLOR
 class QuizView extends Component {
 
     state = {
+        score: 0,
         gradientIndex: 0,
+        currentCardIndex: 0,
         colorTop: TOP_COLORS_SPECTRUM[0],
         colorBottom: BOTTOM_COLORS_SPECTRUM[0]
     }
@@ -89,6 +92,8 @@ class QuizView extends Component {
     }
 
     render() {
+        const {question, answer} = this.props.deck.questions[this.state.currentCardIndex]
+
         const frontAnimatedStyle = {
             transform: [
                 {rotateY: this.frontInterpolate},
@@ -120,7 +125,7 @@ class QuizView extends Component {
                                 justifyContent: 'center'
                             }}>
                                 <Text style={[styles.flipText, {color: this.state.colorTop}]}>
-                                    This text is flipping on the front.
+                                    { question }
                                 </Text>
                             </View>
 
@@ -148,7 +153,7 @@ class QuizView extends Component {
                             }}>
 
                                 <Text style={[styles.flipText, {color: this.state.colorTop}]}>
-                                    This text is flipping on the back.
+                                    { answer }
                                 </Text>
                             </View>
 
@@ -226,4 +231,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default QuizView;
+function mapStateToProps(state, ownProps) {
+    const {title} = ownProps.navigation.state.params;
+
+    console.log(state.decks[title])
+
+
+    return {
+        deck: state.decks[title]
+    }
+}
+
+export default connect(mapStateToProps)(QuizView);
