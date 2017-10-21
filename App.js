@@ -93,7 +93,7 @@ const MainNavigator = StackNavigator({
     QuizView: {
         screen: QuizView,
         navigationOptions: {
-            title: "Quiz",
+            title: 'Quiz',
             header: null
         }
     }

@@ -8,20 +8,20 @@ import {orange, white} from '../utils/colors'
 
 export default function FlatButton({size = 'lg', hasBorder, iconName, onPress, text, backgroundColor = orange, borderColor = orange, style}) {
     const btnSizeStyle = {
-        container: styles['button_' + size],
+        wrapper: styles['button_' + size],
         text: styles['text_' + size],
     };
 
     return (
-        <View style={   !hasBorder ? [styles.button, btnSizeStyle.container, {
+        <View style={   !hasBorder ? [styles.button, {
             backgroundColor,
             borderColor: backgroundColor
-        }, style] : [styles.button, styles.buttonBorder, btnSizeStyle.container, {borderColor}, style]   }>
+        }, style] : [styles.button, styles.buttonBorder, {borderColor}, style]   }>
             <TouchableNativeFeedback
                 onPress={onPress}
                 background={TouchableNativeFeedback.Ripple("rgba(0, 0, 0, 0.5)", true)}>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={[styles.wrapper, btnSizeStyle.wrapper]}>
 
                     <MaterialIcons name={iconName} style={{color: (hasBorder ? borderColor : white), marginRight: 1}}
                                    size={size === 'md' ? 14 : 18}/>
@@ -36,6 +36,11 @@ export default function FlatButton({size = 'lg', hasBorder, iconName, onPress, t
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     button: {
         borderWidth: 1,
         borderRadius: 5
