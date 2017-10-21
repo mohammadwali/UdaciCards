@@ -115,11 +115,6 @@ const configureStore = () => {
 
 
 export default class App extends Component {
-    state = {
-        email: '',
-    };
-
-
     render() {
         return (
             <Provider store={configureStore()}>
