@@ -8,3 +8,4 @@ export const red = '#b71845'
 export const orange = '#f26f28'
 export const darkOrange = '#7f3f1b'
 export const green = '#0f8d00'
+export const transparent= "transparent"

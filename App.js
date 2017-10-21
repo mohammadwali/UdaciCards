@@ -7,7 +7,7 @@ import {MaterialIcons} from '@expo/vector-icons'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import thunk from 'redux-thunk';
 
-import {orange, gray, white, darkGray} from './utils/colors'
+import {orange, gray, white, darkGray, transparent} from './utils/colors'
 
 import rootReducer from './reducers/index'
 
@@ -61,15 +61,22 @@ const Tabs = TabNavigator({
 const mainNavigatorViewOptions = {
     headerTintColor: white,
     headerStyle: {
-        backgroundColor: orange
+        backgroundColor: orange,
+        height: 56 + Constants.statusBarHeight,
+        paddingTop: Constants.statusBarHeight
     }
 }
 const MainNavigator = StackNavigator({
     Home: {
-        screen: ({navigation}) => <View style={{flex: 1}}>
-            <Header backgroundColor={orange}/>
-            <Tabs screenProps={{rootNavigation: navigation}}/>
-        </View>,
+        screen: ({navigation}) => {
+            return (
+                <View style={{flex: 1}}>
+                    <StatusBar backgroundColor={orange}/>
+                    <Header backgroundColor={orange}/>
+                    <Tabs screenProps={{rootNavigation: navigation}}/>
+                </View>
+            )
+        },
 
         navigationOptions: {
             header: null
@@ -85,7 +92,7 @@ const MainNavigator = StackNavigator({
     },
     QuizView: {
         screen: QuizView,
-        navigationOptions:{
+        navigationOptions: {
             title: "Quiz",
             header: null
         }
@@ -116,13 +123,11 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={configureStore()}>
-                <View style={{flex: 1, backgroundColor: gray, flexDirection: 'column'}}>
-
-                    <StatusBar backgroundColor={orange}/>
+                <View style={{flex: 1, backgroundColor: transparent, flexDirection: 'column'}}>
                     <MainNavigator />
-
                 </View>
             </Provider>
+
         );
     }
 }
