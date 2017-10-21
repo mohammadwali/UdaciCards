@@ -12,12 +12,16 @@ class QuizProgress extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps.currentCard !== this.props.currentCard || nextProps.totalCards !== this.props.totalCards || nextState.progressWidth !== this.state.progressWidth)
+        return (
+            nextProps.currentCard !== this.props.currentCard ||
+            nextProps.totalCards !== this.props.totalCards ||
+            nextState.progressWidth !== this.state.progressWidth
+        )
     }
 
     componentDidUpdate() {
         const {totalCards, completed} = this.props;
-        const progressWidth = (completed  / totalCards) * width;
+        const progressWidth = (completed / totalCards) * width;
 
         this.setState({
             progressWidth
