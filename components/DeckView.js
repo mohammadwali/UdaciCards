@@ -20,6 +20,17 @@ class DeckView extends Component {
     }
 
 
+    startQuiz() {
+        const {deck, navigation} = this.props;
+
+        if (deck.questions.length === 0) {
+            return ToastAndroid.show('No Cards in this Deck', ToastAndroid.SHORT);
+        }
+
+        navigation.navigate('QuizView', {title: deck.title})
+    }
+
+
     render() {
         const {deck, deleteDeck, navigation} = this.props;
         const availableCards = deck.questions.length;
@@ -77,8 +88,7 @@ class DeckView extends Component {
                             textStyle={{textAlign: 'center'}}
                             iconName='question-answer'
                             text='Start Quiz'
-                            onPress={() => {
-                            }}
+                            onPress={this.startQuiz.bind(this)}
                         />
                     </View>
                 </View>
