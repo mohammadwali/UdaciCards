@@ -1,14 +1,14 @@
 import Chroma from 'chroma-js'
 import {LinearGradient} from 'expo'
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, Animated} from 'react-native'
+import {StyleSheet, Text, View, Animated, Dimensions} from 'react-native'
 
 import {white} from '../utils/colors'
 import RoundButton from '../components/RoundButton'
 import FlatButton from '../components/FlatButton'
 
 const GRADIENT_COLOR_LENGTH = 700
-
+const {width} = Dimensions.get('window');
 const TOP_COLORS = ['#000428', '#003973', '#4776E6', '#134E5E', '#C04848', '#000000', '#001510']
 const BOTTOM_COLORS = ['#004e92', '#E5E5BE', '#8E54E9', '#71B280', '#480048', '#e74c3c', '#00bf8f']
 
@@ -176,7 +176,21 @@ class QuizView extends Component {
 
                         </Animated.View>
                     </View>
+
                 </View>
+
+                <View style={{width, paddingRight: 30, paddingLeft: 30, paddingBottom: 20}}>
+
+                    <FlatButton
+                        text="Exit Quiz"
+                        iconName="exit-to-app"
+                        backgroundColor="rgba(0,0,0,0.2)"
+                        onPress={() => this.props.navigation.goBack()}
+                    />
+
+
+                </View>
+
 
             </LinearGradient>
         );
@@ -187,7 +201,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 55
     },
     flipCard: {
         width: 300,
