@@ -6,7 +6,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {orange, white} from '../utils/colors'
 
 
-export default function FlatButton({size = 'md', hasBorder, iconName, onPress, text, backgroundColor = orange, borderColor = orange, style}) {
+export default function FlatButton({size = 'lg', hasBorder, iconName, onPress, text, backgroundColor = orange, borderColor = orange, style}) {
     const btnSizeStyle = {
         container: styles['button_' + size],
         text: styles['text_' + size],
@@ -16,7 +16,7 @@ export default function FlatButton({size = 'md', hasBorder, iconName, onPress, t
         <View style={   !hasBorder ? [styles.button, btnSizeStyle.container, {
             backgroundColor,
             borderColor: backgroundColor
-        }, style] : [styles.button, styles.buttonBorder, btnSizeStyle.container , {borderColor}, style]   }>
+        }, style] : [styles.button, styles.buttonBorder, btnSizeStyle.container, {borderColor}, style]   }>
             <TouchableNativeFeedback
                 onPress={onPress}
                 background={TouchableNativeFeedback.Ripple("rgba(0, 0, 0, 0.5)", true)}>
