@@ -6,7 +6,7 @@ import {white} from '../utils/colors'
 
 const {width} = Dimensions.get('window');
 
-class QuizCard extends Component {
+class QuizProgress extends Component {
     state = {
         progressWidth: 0
     }
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default QuizCard;
+export default QuizProgress;
