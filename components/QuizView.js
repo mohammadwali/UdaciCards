@@ -234,9 +234,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state, ownProps) {
     const {title} = ownProps.navigation.state.params;
 
-    console.log(state.decks[title])
-
-
     return {
         deck: state.decks[title]
     }
