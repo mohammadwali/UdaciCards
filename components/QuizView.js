@@ -3,7 +3,7 @@ import {LinearGradient} from 'expo'
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, Animated, Dimensions} from 'react-native'
 
-import {white} from '../utils/colors'
+import {white, green, red} from '../utils/colors'
 import RoundButton from '../components/RoundButton'
 import FlatButton from '../components/FlatButton'
 
@@ -161,14 +161,14 @@ class QuizView extends Component {
                                     text='Correct'
                                     onPress={() => console.log('hey 1')}
                                     size='lg'
-                                    background='green'
+                                    background={green}
                                 />
                                 <RoundButton
                                     iconName='close'
                                     text='Incorrect'
                                     onPress={() => console.log('hey 2')}
                                     size='lg'
-                                    background='red'
+                                    background={red}
                                 />
 
 
