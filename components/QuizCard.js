@@ -83,9 +83,6 @@ class QuizCard extends Component {
 
 
     render() {
-
-        console.log(this.props)
-
         const {card: {question, answer}, onCorrect, onIncorrect} = this.props;
 
         const frontAnimatedStyle = {

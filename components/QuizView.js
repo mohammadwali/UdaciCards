@@ -3,10 +3,11 @@ import {LinearGradient} from 'expo'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import Carousel from 'react-native-snap-carousel'
-import {StyleSheet, Text, View, Dimensions, Alert} from 'react-native'
+import {StyleSheet, View, Dimensions, Alert} from 'react-native'
 
-import FlatButton from './FlatButton'
 import QuizCard from './QuizCard'
+import FlatButton from './FlatButton'
+import QuizProgress from './QuizProgress'
 
 const GRADIENT_COLOR_LENGTH = 700
 const {width, height} = Dimensions.get('window');
@@ -71,22 +72,31 @@ class QuizView extends Component {
 
 
     render() {
+        const itemWidth = 320;
+        const {questions} = this.props.deck;
+        const {colorTop, colorBottom, currentCardIndex} = this.state;
 
         return (
-            <LinearGradient colors={[this.state.colorTop, this.state.colorBottom]}
+            <LinearGradient colors={[colorTop, colorBottom]}
                             style={{flex: 1}}
                             start={[1, 0]}
                             end={[0, 1]}>
 
+                <QuizProgress
+                    totalCards={questions.length}
+                    currentCard={(currentCardIndex + 1)}
+                    completed={currentCardIndex}
+                />
+
                 <Carousel
-                    scrollEnabled={false}
+                    data={questions}
                     ref={"_carousel"}
-                    data={this.props.deck.questions}
-                    renderItem={this._renderItem.bind(this)}
-                    itemWidth={320}
                     itemHeight={height}
-                    sliderHeight={height}
                     sliderWidth={width}
+                    sliderHeight={height}
+                    itemWidth={itemWidth}
+                    scrollEnabled={false}
+                    renderItem={this._renderItem.bind(this)}
                     contentContainerCustomStyle={styles.carouselContentContainer}
                 />
 
@@ -126,7 +136,6 @@ const styles = StyleSheet.create({
         lineHeight: 50,
     },
     carouselContentContainer: {
-        marginTop: 55,
         alignItems: 'center',
     },
     footer: {
