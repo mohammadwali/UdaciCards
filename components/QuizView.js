@@ -2,7 +2,7 @@ import Chroma from 'chroma-js'
 import {LinearGradient} from 'expo'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, Animated, Dimensions} from 'react-native'
+import {StyleSheet, Text, View, Animated, Dimensions, Alert} from 'react-native'
 
 import {white, green, red} from '../utils/colors'
 import RoundButton from '../components/RoundButton'
@@ -21,7 +21,7 @@ class QuizView extends Component {
     state = {
         score: 0,
         gradientIndex: 0,
-        currentCardIndex: 0,
+        currentCardIndex: 1,
         colorTop: TOP_COLORS_SPECTRUM[0],
         colorBottom: BOTTOM_COLORS_SPECTRUM[0]
     }
@@ -89,6 +89,22 @@ class QuizView extends Component {
             }).start();
         }
 
+    }
+
+    exit() {
+        if (this.state.currentCardIndex > 0) {
+            return Alert.alert(
+                `You are about to exit`,
+                `Are you sure? You will loose your current progress.`,
+                [
+                    {text: 'Cancel', style: 'cancel'},
+                    {text: 'Exit', onPress: () => this.props.navigation.goBack()},
+                ],
+                {cancelable: true}
+            )
+        }
+
+        this.props.navigation.goBack()
     }
 
     render() {
@@ -190,7 +206,7 @@ class QuizView extends Component {
                         text="Exit Quiz"
                         iconName="exit-to-app"
                         backgroundColor="rgba(0,0,0,0.2)"
-                        onPress={() => this.props.navigation.goBack()}
+                        onPress={this.exit.bind(this)}
                         size="lg"
                     />
 
