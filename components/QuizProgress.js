@@ -4,7 +4,7 @@ import {Constants} from 'expo'
 
 import {white} from '../utils/colors'
 
-const {width} = Dimensions.get('window');
+const {width} = Dimensions.get('window')
 
 class QuizProgress extends Component {
     state = {
@@ -20,8 +20,8 @@ class QuizProgress extends Component {
     }
 
     componentDidUpdate() {
-        const {totalCards, completed} = this.props;
-        const progressWidth = (completed / totalCards) * width;
+        const {totalCards, completed} = this.props
+        const progressWidth = (completed / totalCards) * width
 
         this.setState({
             progressWidth
@@ -31,7 +31,7 @@ class QuizProgress extends Component {
 
     render() {
         const {progressWidth: width} = this.state
-        const {totalCards, currentCard} = this.props;
+        const {totalCards, currentCard} = this.props
 
         return (
             <View style={styles.container}>
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default QuizProgress;
+export default QuizProgress
