@@ -3,14 +3,14 @@ import {Text, StyleSheet, TouchableNativeFeedback, View} from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons';
 
 
-import {darkOrange, orange, white} from '../utils/colors'
+import {orange, white} from '../utils/colors'
 
 
 export default function FlatButton({hasBorder, iconName, onPress, text, backgroundColor = orange, borderColor = orange}) {
     return (
         <View style={   !hasBorder ? [styles.button, {
             backgroundColor,
-            borderColor
+            borderColor: backgroundColor
         }] : [styles.button, styles.buttonBorder, {borderColor}]   }>
             <TouchableNativeFeedback
                 onPress={onPress}

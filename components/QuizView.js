@@ -91,13 +91,17 @@ class QuizView extends Component {
     render() {
         const frontAnimatedStyle = {
             transform: [
-                {rotateY: this.frontInterpolate}
-            ]
+                {rotateY: this.frontInterpolate},
+            ],
+            zIndex: this.frontOpacity
         }
         const backAnimatedStyle = {
             transform: [
                 {rotateY: this.backInterpolate}
-            ]
+
+            ],
+            zIndex: this.backOpacity
+
         }
         return (
             <LinearGradient colors={[this.state.colorTop, this.state.colorBottom]}
@@ -115,7 +119,7 @@ class QuizView extends Component {
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}>
-                                <Text style={[styles.flipText, {color: this.state.colorTop, marginTop: 0}]}>
+                                <Text style={[styles.flipText, {color: this.state.colorTop}]}>
                                     This text is flipping on the front.
                                 </Text>
                             </View>
@@ -127,7 +131,7 @@ class QuizView extends Component {
                                     iconName='remove-red-eye'
                                     text='View answer'
                                     onPress={() => this.flipCard()}
-                                    background={this.state.colorTop}
+                                    backgroundColor={this.state.colorTop}
                                 />
 
 
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
         top: 0,
     },
     flipText: {
-        marginTop: 60,
+        marginTop: 40,
         textAlign: 'center',
         fontSize: 35,
         lineHeight: 50,
