@@ -79,6 +79,19 @@ class AddCard extends Component {
         }
     }
 
+    onSubmit() {
+
+
+        if (this.state.isValid) {
+            this.props.addCard({
+                question: this.state.question,
+                answer: this.state.answer
+            })
+        }
+
+
+    }
+
 
     render() {
 
@@ -119,7 +132,7 @@ class AddCard extends Component {
                             blurOnSubmit={ true }
                             ref="answerInput"
                             value={answer}
-                            multiline={true}
+                            onSubmitEditing={this.onSubmit.bind(this)}
                             onChangeText={(value) => this.handleInputTextChange.bind(this)('answer', value)}
                         />
                     </View>
@@ -128,16 +141,9 @@ class AddCard extends Component {
                     <FlatButton
                         iconName="send"
                         text="Add new card"
-                        onPress={() => {
-
-                            if (this.state.isValid) {
-                                this.props.addCard({
-                                    question: this.state.question,
-                                    answer: this.state.answer
-                                })
-                            }
-
-                        }}
+                        size="lg"
+                        style={{marginTop: 25}}
+                        onPress={this.onSubmit.bind(this)}
                     />
                 </View>
             </KeyboardAvoidingView>

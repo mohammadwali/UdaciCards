@@ -186,6 +186,7 @@ class QuizView extends Component {
                         iconName="exit-to-app"
                         backgroundColor="rgba(0,0,0,0.2)"
                         onPress={() => this.props.navigation.goBack()}
+                        size="lg"
                     />
 
 

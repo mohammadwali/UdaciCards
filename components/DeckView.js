@@ -69,7 +69,9 @@ class DeckView extends Component {
                             hasBorder
                             iconName='library-add'
                             text='Add Card'
+                            style={{marginRight: 20}}
                             onPress={() => navigation.navigate('AddCard', {deckTitle: deck.title})}
+                            size="lg"
                         />
 
 
@@ -78,17 +80,19 @@ class DeckView extends Component {
                             iconName='delete'
                             text='Remove Deck'
                             onPress={() => deleteDeck.bind(this)(deck.title)}
+                            size="lg"
                         />
 
 
                     </View>
 
-                    <View style={{width: 300}}>
+                    <View style={{width: 300, marginTop: 20}}>
                         <FlatButton
                             textStyle={{textAlign: 'center'}}
                             iconName='question-answer'
                             text='Start Quiz'
                             onPress={this.startQuiz.bind(this)}
+                            size="lg"
                         />
                     </View>
                 </View>
