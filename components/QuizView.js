@@ -27,6 +27,10 @@ class QuizView extends Component {
         colorBottom: BOTTOM_COLORS_SPECTRUM[0]
     }
 
+    constructor(props) {
+        super(props)
+    }
+
     componentDidMount() {
         this.updateColor();
     }
@@ -62,17 +66,51 @@ class QuizView extends Component {
     _renderItem({index, item: card}) {
         return (
             <QuizCard card={card}
-                      onCorrect={() => {
-                      }}
-                      onIncorrect={() => {
-                      }}
+                      onCorrect={this.onCorrect.bind(this)}
+                      onIncorrect={this.onIncorrect.bind(this)}
             />
         );
     }
 
+    onCorrect() {
+
+
+        this.setState(state => ({
+
+            currentCardIndex: state.currentCardIndex + 1
+
+        }));
+
+
+        this.moveToNextCard();
+
+    }
+
+
+    onIncorrect() {
+        this.moveToNextCard();
+    }
+
+
+    moveToNextCard() {
+        if (this.state.currentCardIndex < (this.props.deck.questions.length - 1)) {
+            this.refs._carousel.snapToNext()
+        }
+
+        else {
+
+            // finish here
+
+            console.log("end")
+
+        }
+    }
+
+
+
 
     render() {
-        const itemWidth = 320;
+        const itemWidth = 300;
         const {questions} = this.props.deck;
         const {colorTop, colorBottom, currentCardIndex} = this.state;
 
