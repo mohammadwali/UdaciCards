@@ -13,8 +13,9 @@ export default function RoundButton({disabled, iconName, onPress, background = o
             <TouchableNativeFeedback
                 onPress={onPress}
                 disabled={disabled}
+                style={styles.wrapper}
                 background={TouchableNativeFeedback.Ripple("rgba(0, 0, 0, 0.5)", true)}>
-                <View>
+                <View style={styles.wrapper}>
                     <MaterialIcons name={iconName} size={23} style={{color: white}}/>
                 </View>
             </TouchableNativeFeedback>
@@ -25,9 +26,12 @@ export default function RoundButton({disabled, iconName, onPress, background = o
 
 
 const styles = StyleSheet.create({
-    button: {
+    wrapper: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    button: {
         marginRight: 20,
         marginTop: 20,
         borderRadius: 100
