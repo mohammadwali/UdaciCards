@@ -6,7 +6,16 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {orange, white} from '../utils/colors'
 
 
-export default function FlatButton({size = 'lg', hasBorder, iconName, onPress, text, backgroundColor = orange, borderColor = orange, style}) {
+export default function FlatButton({
+                                       text,
+                                       style,
+                                       onPress,
+                                       hasBorder,
+                                       iconName,
+                                       size = 'lg',
+                                       borderColor = orange,
+                                       backgroundColor = orange
+                                   }) {
     const btnSizeStyle = {
         wrapper: styles['button_' + size],
         text: styles['text_' + size],
