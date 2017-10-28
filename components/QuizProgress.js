@@ -31,18 +31,30 @@ class QuizProgress extends Component {
 
     render() {
         const {progressWidth: width} = this.state
-        const {totalCards, currentCard} = this.props
+        const {totalCards, onFinishTitle, currentCard} = this.props
+
 
         return (
             <View style={styles.container}>
                 <View style={styles.progressContainer}>
                     <View style={[styles.progressBar, {width}]}/>
                 </View>
-                <View style={styles.countContainer}>
-                    <Text style={[styles.count, {fontWeight: 'bold'}]}>{ currentCard }</Text>
-                    <Text style={styles.count}> of </Text>
-                    <Text style={[styles.count, {fontWeight: 'bold'}]}>{ totalCards }</Text>
-                </View>
+
+                {
+                    (currentCard <= totalCards)
+                        ?
+                        <View style={styles.countContainer}>
+                            <Text style={[styles.count, {fontWeight: 'bold'}]}>{ currentCard }</Text>
+                            <Text style={styles.count}> of </Text>
+                            <Text style={[styles.count, {fontWeight: 'bold'}]}>{ totalCards }</Text>
+                        </View>
+                        :
+                        <View style={styles.countContainer}>
+                            <Text style={[styles.count, {fontWeight: 'bold'}]}>{ onFinishTitle() }</Text>
+                        </View>
+                }
+
+
             </View>
         )
     }

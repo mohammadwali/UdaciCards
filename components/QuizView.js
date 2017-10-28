@@ -5,7 +5,10 @@ import React, {Component} from 'react'
 import Carousel from 'react-native-snap-carousel'
 import {StyleSheet, View, Dimensions, Alert} from 'react-native'
 
+import {getQuizResultTitle} from '../utils'
+
 import QuizCard from './QuizCard'
+import QuizScore from './QuizScore'
 import FlatButton from './FlatButton'
 import QuizProgress from './QuizProgress'
 
@@ -73,25 +76,29 @@ class QuizView extends Component {
     }
 
     moveToNextCard(kind) {
-        if (this.state.currentCardIndex < (this.props.deck.questions.length - 1)) {
+        if (kind === 'correct' && this.state.currentCardIndex !== this.props.deck.questions.length) {
+            this.setState(state => ({
+                currentCardIndex: state.currentCardIndex + 1,
+                score: state.score + 1
+            }));
 
-            this.refs._carousel.snapToNext()
-
-            if (kind === 'correct') {
-
-                this.setState(state => ({
-                    currentCardIndex: state.currentCardIndex + 1
-                }));
-
-            }
         }
 
-        else {
+        if (this.state.currentCardIndex < (this.props.deck.questions.length - 1)) {
+            this.refs._carousel.snapToNext()
+        }
+    }
 
-            // finish here
 
-            console.log("end")
+    calculateResult() {
+        const {questions} = this.props.deck;
+        const {score} = this.state;
 
+        return {
+            score,
+            total: questions.length,
+            wrong: questions.length - score,
+            percent: Math.round((score / questions.length) * 100),
         }
     }
 
@@ -99,7 +106,7 @@ class QuizView extends Component {
     render() {
         const itemWidth = 300;
         const {questions} = this.props.deck;
-        const {colorTop, colorBottom, currentCardIndex} = this.state;
+        const {colorTop, colorBottom, currentCardIndex, score} = this.state;
 
         return (
             <LinearGradient colors={[colorTop, colorBottom]}
@@ -111,19 +118,29 @@ class QuizView extends Component {
                     totalCards={questions.length}
                     currentCard={(currentCardIndex + 1)}
                     completed={currentCardIndex}
+                    onFinishTitle={() => getQuizResultTitle(score, questions.length)}
                 />
 
-                <Carousel
-                    data={questions}
-                    ref={"_carousel"}
-                    itemHeight={height}
-                    sliderWidth={width}
-                    sliderHeight={height}
-                    itemWidth={itemWidth}
-                    scrollEnabled={false}
-                    renderItem={this._renderItem.bind(this)}
-                    contentContainerCustomStyle={styles.carouselContentContainer}
-                />
+                {
+
+                    (currentCardIndex === (questions.length - 1)) ?
+                        <Carousel
+                            data={questions}
+                            ref={"_carousel"}
+                            itemHeight={height}
+                            sliderWidth={width}
+                            sliderHeight={height}
+                            itemWidth={itemWidth}
+                            scrollEnabled={false}
+                            renderItem={this._renderItem.bind(this)}
+                            contentContainerCustomStyle={styles.carouselContentContainer}
+                        /> :
+                        <QuizScore
+                            result={this.calculateResult()}
+                            onReplay={() => console.log("Do replay")}
+                        />
+
+                }
 
 
                 <View style={styles.footer}>
