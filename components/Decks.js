@@ -55,19 +55,18 @@ class Decks extends Component {
 
             !hasDecks ?
 
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20}}>
-
+                <View style={styles.placeholderContainer}>
                     <View>
                         <MaterialCommunityIcons name='emoticon-sad' size={140} style={{color: darkerGray}}/>
                     </View>
 
-                    <Text style={{color: darkerGray, fontSize: 30, textAlign: 'center', lineHeight: 50}}>
+                    <Text style={styles.placeholderText}>
                         No decks are available.
                     </Text>
 
                     <View style={{marginTop: 10}}>
                         <TouchableNativeFeedback onPress={() => this.props.navigation.navigate('AddDeck')}>
-                            <Text style={{fontSize: 22, textAlign: 'center', color: orange}}>
+                            <Text style={styles.placeholderButton}>
                                 Create now
                             </Text>
                         </TouchableNativeFeedback>
@@ -77,10 +76,7 @@ class Decks extends Component {
                 :
 
                 <ScrollView>
-                    <View style={{
-                        marginLeft: 20,
-                        marginRight: 20
-                    }}>
+                    <View style={styles.decksContainer}>
                         <DecksHeading />
                         <DecksList decks={decks} openDeck={this.openDeck.bind(this)}/>
                     </View>
@@ -93,11 +89,26 @@ class Decks extends Component {
 
 
 const styles = StyleSheet.create({
-    activityIndicator: {
+    decksContainer: {
+        marginLeft: 20,
+        marginRight: 20
+    },
+    placeholderContainer: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 8,
-        flex: 1, height: 80
+        padding: 20
+    },
+    placeholderText: {
+        color: darkerGray,
+        fontSize: 30,
+        textAlign: 'center',
+        lineHeight: 50
+    },
+    placeholderButton: {
+        fontSize: 22,
+        textAlign: 'center',
+        color: orange
     }
 })
 
