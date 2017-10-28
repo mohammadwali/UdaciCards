@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {ScrollView, View, Text, TouchableNativeFeedback, RefreshControl, StyleSheet} from 'react-native'
+import {ScrollView, View, Text, TouchableNativeFeedback, StyleSheet} from 'react-native'
 import {List, ListItem} from 'react-native-elements'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
