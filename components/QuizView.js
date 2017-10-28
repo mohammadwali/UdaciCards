@@ -51,7 +51,7 @@ class QuizView extends Component {
 
 
     exit() {
-        if (this.state.currentCardIndex > 0) {
+        if (this.state.currentCardIndex > 0 && !this.isResultView()) {
             return Alert.alert(
                 `You are about to exit`,
                 `Are you sure? You will loose your current progress.`,
@@ -102,11 +102,16 @@ class QuizView extends Component {
         }
     }
 
+    isResultView() {
+        return !(this.state.currentCardIndex <= (this.props.deck.questions.length - 1))
+    }
+
 
     render() {
         const itemWidth = 300;
         const {questions} = this.props.deck;
         const {colorTop, colorBottom, currentCardIndex, score} = this.state;
+        const isResultView = !(currentCardIndex <= (questions.length - 1))
 
         return (
             <LinearGradient colors={[colorTop, colorBottom]}
@@ -123,7 +128,12 @@ class QuizView extends Component {
 
                 {
 
-                    (currentCardIndex <= (questions.length - 1)) ?
+                    isResultView ?
+                        <QuizScore
+                            baseColor={colorBottom}
+                            result={this.calculateResult()}
+                            onReplay={() => console.log("Do replay")}
+                        /> :
                         <Carousel
                             data={questions}
                             ref={"_carousel"}
@@ -134,20 +144,15 @@ class QuizView extends Component {
                             scrollEnabled={false}
                             renderItem={this._renderItem.bind(this)}
                             contentContainerCustomStyle={styles.carouselContentContainer}
-                        /> :
-                        <QuizScore
-                            baseColor={colorBottom}
-                            result={this.calculateResult()}
-                            onReplay={() => console.log("Do replay")}
                         />
 
                 }
 
 
-                <View style={styles.footer}>
+                <View style={[styles.footer]}>
                     <FlatButton
-                        text="Exit Quiz"
-                        iconName="exit-to-app"
+                        text={isResultView ? "Back to Deck" : "Exit Quiz"}
+                        iconName={isResultView ? "arrow-back" : "exit-to-app" }
                         backgroundColor="rgba(0,0,0,0.2)"
                         onPress={this.exit.bind(this)}
                         size="lg"
