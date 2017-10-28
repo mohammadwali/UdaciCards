@@ -66,35 +66,24 @@ class QuizView extends Component {
     _renderItem({index, item: card}) {
         return (
             <QuizCard card={card}
-                      onCorrect={this.onCorrect.bind(this)}
-                      onIncorrect={this.onIncorrect.bind(this)}
+                      onCorrect={() => this.moveToNextCard.bind(this)('correct')}
+                      onIncorrect={() => this.moveToNextCard.bind(this)('incorrect')}
             />
         );
     }
 
-    onCorrect() {
-
-
-        this.setState(state => ({
-
-            currentCardIndex: state.currentCardIndex + 1
-
-        }));
-
-
-        this.moveToNextCard();
-
-    }
-
-
-    onIncorrect() {
-        this.moveToNextCard();
-    }
-
-
-    moveToNextCard() {
+    moveToNextCard(kind) {
         if (this.state.currentCardIndex < (this.props.deck.questions.length - 1)) {
+
             this.refs._carousel.snapToNext()
+
+            if (kind === 'correct') {
+
+                this.setState(state => ({
+                    currentCardIndex: state.currentCardIndex + 1
+                }));
+
+            }
         }
 
         else {
@@ -105,8 +94,6 @@ class QuizView extends Component {
 
         }
     }
-
-
 
 
     render() {
