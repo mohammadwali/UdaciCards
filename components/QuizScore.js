@@ -10,7 +10,7 @@ class QuizScore extends Component {
 
 
     render() {
-        const {baseColor, result} = this.props;
+        const {baseColor, result, onReplay} = this.props;
 
 
         return (
@@ -50,7 +50,7 @@ class QuizScore extends Component {
                         text="Replay Quiz"
                         iconName="replay"
                         backgroundColor="rgba(0,0,0,0.2)"
-
+                        onPress={onReplay}
                         size="lg"
                     />
                 </View>

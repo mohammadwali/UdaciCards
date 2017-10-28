@@ -106,6 +106,12 @@ class QuizView extends Component {
         return !(this.state.currentCardIndex <= (this.props.deck.questions.length - 1))
     }
 
+    replayQuiz() {
+        this.setState({
+            score: 0,
+            currentCardIndex: 0
+        });
+    }
 
     render() {
         const itemWidth = 300;
@@ -132,7 +138,7 @@ class QuizView extends Component {
                         <QuizScore
                             baseColor={colorBottom}
                             result={this.calculateResult()}
-                            onReplay={() => console.log("Do replay")}
+                            onReplay={this.replayQuiz.bind(this)}
                         /> :
                         <Carousel
                             data={questions}
