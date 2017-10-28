@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {ScrollView, View, Text, ActivityIndicator, RefreshControl, StyleSheet} from 'react-native'
+import {ScrollView, View, Text, TouchableNativeFeedback, RefreshControl, StyleSheet} from 'react-native'
 import {List, ListItem} from 'react-native-elements'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 
-import {gray} from '../utils/colors'
+import {gray, orange, darkerGray} from '../utils/colors'
 import {formatCardsCount} from '../utils'
 
 import {loadDecks} from '../actions/deckActions'
@@ -33,10 +34,6 @@ const DecksList = ({decks, openDeck}) => <View style={{marginTop: 0}}>
 
 
 class Decks extends Component {
-    state = {
-        isLoading: false,
-        isRefreshing: false
-    }
 
     static defaultProps = {
         decks: {}
@@ -52,25 +49,33 @@ class Decks extends Component {
 
     render() {
         const {decks} = this.props;
-        const {isLoading, isRefreshing} = this.state;
 
         return (
 
-            isLoading ?
+            !decks.length ?
 
-                <ActivityIndicator
-                    animating={true}
-                    style={styles.activityIndicator}
-                    size='large'/>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20}}>
+
+                    <View>
+                        <MaterialCommunityIcons name='emoticon-sad' size={140} style={{color: darkerGray}}/>
+                    </View>
+
+                    <Text style={{color: darkerGray, fontSize: 30, textAlign: 'center', lineHeight: 50}}>
+                        No decks are available.
+                    </Text>
+
+                    <View style={{marginTop: 10}}>
+                        <TouchableNativeFeedback onPress={() => this.props.navigation.navigate('AddDeck')}>
+                            <Text style={{fontSize: 22, textAlign: 'center', color: orange}}>
+                                Create now
+                            </Text>
+                        </TouchableNativeFeedback>
+                    </View>
+                </View>
 
                 :
 
-                <ScrollView
-                    refreshControl={ <RefreshControl
-                        refreshing={isRefreshing}
-                        onRefresh={() => console.log('refreshing....')}
-                    />}
-                >
+                <ScrollView>
                     <View style={{
                         marginLeft: 20,
                         marginRight: 20
