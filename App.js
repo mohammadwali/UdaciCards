@@ -8,6 +8,7 @@ import {TabNavigator, StackNavigator} from 'react-navigation'
 import thunk from 'redux-thunk';
 
 import {orange, gray, white, darkGray, transparent} from './utils/colors'
+import {setLocalNotification} from './utils/notifications'
 
 import rootReducer from './reducers/index'
 
@@ -115,6 +116,11 @@ const configureStore = () => {
 
 
 export default class App extends Component {
+
+    componentDidMount() {
+        setLocalNotification()
+    }
+
     render() {
         return (
             <Provider store={configureStore()}>

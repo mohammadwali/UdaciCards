@@ -1,5 +1,5 @@
 import {AsyncStorage} from 'react-native'
-
+const NOTIFICATION_KEY = 'UDACICARDS:NOTIFICATIONKEY'
 const FLASH_CARDS_STORAGE_KEY = 'UDACICARDS:STORAGEKEY'
 
 export const getDecks = () => AsyncStorage.getItem(FLASH_CARDS_STORAGE_KEY)
@@ -25,3 +25,10 @@ export const createCard = (deck, card) => getDecks().then(decks => {
 
     return AsyncStorage.setItem(FLASH_CARDS_STORAGE_KEY, JSON.stringify(decks));
 })
+
+
+export const getSavedScheduledNotification = () => AsyncStorage.getItem(NOTIFICATION_KEY)
+    .then(result => JSON.parse(result))
+
+
+export const saveSavedScheduledNotification = () => AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
