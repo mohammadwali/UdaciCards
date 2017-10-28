@@ -49,10 +49,11 @@ class Decks extends Component {
 
     render() {
         const {decks} = this.props;
+        const hasDecks = Object.keys(decks).length;
 
         return (
 
-            !decks.length ?
+            !hasDecks ?
 
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20}}>
 
