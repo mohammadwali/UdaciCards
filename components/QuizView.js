@@ -97,7 +97,7 @@ class QuizView extends Component {
         return {
             score,
             total: questions.length,
-            wrong: questions.length - score,
+            incorrect: questions.length - score,
             percent: Math.round((score / questions.length) * 100),
         }
     }
@@ -123,7 +123,7 @@ class QuizView extends Component {
 
                 {
 
-                    (currentCardIndex === (questions.length - 1)) ?
+                    (currentCardIndex <= (questions.length - 1)) ?
                         <Carousel
                             data={questions}
                             ref={"_carousel"}
@@ -136,6 +136,7 @@ class QuizView extends Component {
                             contentContainerCustomStyle={styles.carouselContentContainer}
                         /> :
                         <QuizScore
+                            baseColor={colorBottom}
                             result={this.calculateResult()}
                             onReplay={() => console.log("Do replay")}
                         />
