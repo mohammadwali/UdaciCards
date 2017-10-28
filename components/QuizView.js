@@ -76,10 +76,10 @@ class QuizView extends Component {
     }
 
     moveToNextCard(kind) {
-        if (kind === 'correct' && this.state.currentCardIndex !== this.props.deck.questions.length) {
+        if (this.state.currentCardIndex !== this.props.deck.questions.length) {
             this.setState(state => ({
                 currentCardIndex: state.currentCardIndex + 1,
-                score: state.score + 1
+                score: kind === 'correct' ? state.score + 1 : state.score
             }));
 
         }
