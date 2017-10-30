@@ -1,5 +1,19 @@
 {
   "expo": {
-    "sdkVersion": "21.0.0"
+    "name": "UdaciCards",
+    "icon": "./images/logo-512.png",
+    "version": "1.0.0",
+    "slug": "udacicards",
+    "sdkVersion": "21.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "com.wali.udacicards"
+    },
+    "android": {
+      "package": "com.wali.udacicards"
+    },
+    "notification": {
+      "icon": "./images/logo-48.png"
+    }
   }
 }
